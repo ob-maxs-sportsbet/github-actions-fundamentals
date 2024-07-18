@@ -16,3 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "The job was triggered by a ${{ github['event_name'] }} event."
+      - run: echo "The branch the repo is currently referencing is ${{ github['ref'] }} ref."
+      - run: echo "listing dir:"
+      - run: ls
+      - run: echo "the dir was:"
+      - run: pwd
