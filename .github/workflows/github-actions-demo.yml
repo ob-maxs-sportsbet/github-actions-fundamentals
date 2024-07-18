@@ -8,7 +8,7 @@ on:
     branches: main
   schedule:
     # Sunday at 6:15 am UTC
-    -  '15 06 * * 0'
+    - cron: '15 06 * * 0'
   workflow_dispatch: 
 
 jobs:
