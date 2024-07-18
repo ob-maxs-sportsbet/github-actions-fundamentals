@@ -10,6 +10,11 @@ on:
     # Sunday at 6:15 am UTC
     # - cron: '15 06 * * 0'
   workflow_dispatch: 
+    inputs:
+      environment: 
+        description: 'The environment to use'
+        type: environment
+        required: true
 
 jobs:
   Build:
@@ -32,4 +37,11 @@ jobs:
           who-to-greet: '@wulfland'
 
       - name: Output time set in the container
-        run: echo "The time was ${{ steps.hello-action.outputs.time }} when the action said hello"
+        run: echo "The time was ${{ steps.hello-action.outputs.time }} when the action said hello
+    Test:
+      runs-on: ubuntu-latest
+      if: github.event_name == 'workflow_dispatch'
+      needs: Build
+      environment: Test
+      steps: 
+        - run: echo "Testing..."
