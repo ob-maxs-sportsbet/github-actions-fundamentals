@@ -6,9 +6,9 @@ on:
     paths-ignore: './github/*'
   pull_request:
     branches: main
-  schedule:
+  # schedule:
     # Sunday at 6:15 am UTC
-    - cron: '15 06 * * 0'
+    # - cron: '15 06 * * 0'
   workflow_dispatch: 
 
 jobs:
@@ -19,3 +19,17 @@ jobs:
       - run: echo "The branch the repo is currently referencing is ${{ github['ref'] }} ref."
       - run: echo "listing dir:" & ls -a
       - run: echo "the dir was:" & pwd
+  test-action:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.3.0
+
+      - name: Run my own container action
+        id: hello-action
+        uses: ./hello-world-docker-action
+        with:
+          who-to-greet: '@wulfland'
+
+      - name: Output time set in the container
+        run: echo "The time was ${{ steps.hello-action.outputs.time }} when the action said hello"
