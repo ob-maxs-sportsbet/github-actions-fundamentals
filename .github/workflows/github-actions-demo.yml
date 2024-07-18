@@ -38,10 +38,18 @@ jobs:
 
       - name: Output time set in the container
         run: echo "The time was ${{ steps.hello-action.outputs.time }} when the action said hello
-    Test:
+  Test:
       runs-on: ubuntu-latest
+      needs: Build
       if: github.event_name == 'workflow_dispatch'
       needs: Build
       environment: Test
       steps: 
         - run: echo "Testing..."
+  Load-test:
+      runs-on: ubuntu-latest
+      needs: Build
+      if: github.event_name == 'workflow_dispatch'
+      environment: Load-test
+      steps: 
+        - run: echo "Testing..." & sleep 15
