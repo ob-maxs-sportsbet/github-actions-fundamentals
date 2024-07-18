@@ -26,6 +26,7 @@ jobs:
       - run: echo "the dir was:" & pwd
   test-action:
     runs-on: ubuntu-latest
+    if: false
     steps:
       - name: Checkout
         uses: actions/checkout@v3.3.0
